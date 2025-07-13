@@ -1,0 +1,232 @@
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg, #1d2b64, #f8cdda);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+/* App Container */
+.app {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 30px 25px;
+  width: 100%;
+  max-width: 500px;
+  color: #fff;
+  animation: fadeIn 0.6s ease;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Heading */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+  font-size: 28px;
+  color: #ffffff;
+}
+
+/* Input Group */
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+#task-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: box-shadow 0.2s;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
+}
+
+#task-input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+#add-btn {
+  padding: 12px 20px;
+  background: #00c6ff;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.3s ease;
+}
+
+#add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+}
+
+/* Task List */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 16px 20px;
+  border-left: 5px solid #00c6ff;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: slideIn 0.3s ease-out;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+/* Task Text */
+.task-text {
+  flex: 1;
+  padding-right: 20px;
+  word-break: break-word;
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  margin-left: auto;
+}
+
+.delete-btn:hover {
+  background-color: #e84343;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .app {
+    padding: 20px 15px;
+  }
+
+  #add-btn {
+    width: 100%;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  .task-text {
+    padding-right: 10px;
+  }
+}
+/* Floating Notes Background */
+.floating-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* behind everything */
+}
+
+.floating-background .note {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  animation: floatNotes 12s linear infinite;
+  top: 100%;
+}
+
+/* Create multiple notes with different animations */
+.floating-background .note:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 14s;
+}
+.floating-background .note:nth-child(2) {
+  left: 30%;
+  animation-delay: 2s;
+  animation-duration: 18s;
+}
+.floating-background .note:nth-child(3) {
+  left: 50%;
+  animation-delay: 4s;
+}
+.floating-background .note:nth-child(4) {
+  left: 70%;
+  animation-delay: 6s;
+  animation-duration: 20s;
+}
+.floating-background .note:nth-child(5) {
+  left: 90%;
+  animation-delay: 1s;
+}
+
+/* Animation keyframes */
+@keyframes floatNotes {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
