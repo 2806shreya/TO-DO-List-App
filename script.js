@@ -1,62 +1,41 @@
-// Select DOM elements
 const taskInput = document.getElementById("task-input");
 const addBtn = document.getElementById("add-btn");
+const doneBtn = document.getElementById("done-btn");
 const taskList = document.getElementById("task-list");
+const summary = document.getElementById("summary");
 
-// Task array
 let tasks = [];
 
-// Add a new task
-function addTask() {
+// Add task
+addBtn.addEventListener("click", () => {
   const taskText = taskInput.value.trim();
-  if (taskText === "") return;
-
-  const task = {
-    id: Date.now(),
-    text: taskText
-  };
-
-  tasks.push(task);
+  if(taskText === "") return;
+  tasks.push(taskText);
+  renderTasks();
   taskInput.value = "";
-  renderTasks();
-}
+});
 
-// Delete task by ID
-function deleteTask(id) {
-  tasks = tasks.filter(task => task.id !== id);
-  renderTasks();
-}
+// Enter key adds task
+taskInput.addEventListener("keypress", (e) => {
+  if(e.key === "Enter") addBtn.click();
+});
 
-// Render tasks to the UI
+// Render task list
 function renderTasks() {
   taskList.innerHTML = "";
-
-  tasks.forEach(task => {
+  tasks.forEach((task, index) => {
     const li = document.createElement("li");
-
-    // Task text
-    const taskSpan = document.createElement("span");
-    taskSpan.textContent = task.text;
-    taskSpan.classList.add("task-text");
-
-    // Delete button
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.classList.add("delete-btn");
-    deleteBtn.onclick = () => deleteTask(task.id);
-
-    li.appendChild(taskSpan);
-    li.appendChild(deleteBtn);
+    li.textContent = `${index + 1}. ${task}`;
     taskList.appendChild(li);
   });
 }
 
-// Event Listeners
-addBtn.addEventListener("click", addTask);
-
-// Allow pressing Enter to add task
-taskInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    addTask();
+// Done button shows summary
+doneBtn.addEventListener("click", () => {
+  if(tasks.length === 0){
+    summary.textContent = "No tasks added!";
+    return;
   }
+  taskList.style.display = "none";
+  summary.innerHTML = `<h2>Today's To-Do Summary:</h2><ul>${tasks.map(t => `<li>${t}</li>`).join('')}</ul>`;
 });
